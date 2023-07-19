@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button, Container, Header, List } from 'semantic-ui-react';
+import {v4 as uuid} from 'uuid';
 
 import { Activity } from '../models/activity';
 import { NavBar } from './NavBar';
@@ -35,7 +36,12 @@ function App() {
     setEditMode(false);
   }
 
-
+  const handleFormEditOrUpdate = (activity : Activity)=>{
+    activity.id ? setActivities([...activities.filter(x=> x.id !== activity.id), activity])
+    : setActivities([...activities, {...activity, id: uuid()}]);
+    handleFormClose();
+    setSelectedActivity(activity);
+  }
 
   return (
     <div>
@@ -48,7 +54,8 @@ function App() {
             selectActivity = {handleSelectActivity}
             cancelSelectActivity = {handleCancelSelectActivity}
             openForm = {handleFormOpen}
-            closeForm = {handleFormClose}/>
+            closeForm = {handleFormClose}
+            createOrEdit={handleFormEditOrUpdate}/>
         </Container>
         
     </div>
