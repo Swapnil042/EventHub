@@ -36,6 +36,12 @@ function App() {
     setEditMode(false);
   }
 
+  const handleDeleteActivity = (id: string)=>{
+    setActivities([...activities.filter(activity => activity.id !== id)]);
+    setEditMode(false);
+    setSelectedActivity(undefined);
+  }
+
   const handleFormEditOrUpdate = (activity : Activity)=>{
     activity.id ? setActivities([...activities.filter(x=> x.id !== activity.id), activity])
     : setActivities([...activities, {...activity, id: uuid()}]);
@@ -55,7 +61,8 @@ function App() {
             cancelSelectActivity = {handleCancelSelectActivity}
             openForm = {handleFormOpen}
             closeForm = {handleFormClose}
-            createOrEdit={handleFormEditOrUpdate}/>
+            createOrEdit={handleFormEditOrUpdate}
+            deleteActivity={handleDeleteActivity}/>
         </Container>
         
     </div>
