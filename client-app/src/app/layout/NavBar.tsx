@@ -1,12 +1,12 @@
-import React from 'react';
-import { Button, Container, Menu } from 'semantic-ui-react';
+import {Button, Container, Menu} from "semantic-ui-react";
+import React from "react";
 
-interface Props{
-    openForm: ()=> void;
+interface Props {
+    openForm: () => void;
 }
 
-export const NavBar = ({openForm}: Props)=>{
-    return(
+export default function NavBar({openForm}: Props) {
+    return (
         <Menu inverted fixed='top'>
             <Container>
                 <Menu.Item header>
